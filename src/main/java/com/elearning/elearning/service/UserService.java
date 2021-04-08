@@ -1,36 +1,18 @@
 package com.elearning.elearning.service;
 
 import com.elearning.elearning.model.User;
-import com.elearning.elearning.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.List;
 
-@Service
-public class UserService {
+public interface UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    User saveUser(User user);
 
-    public User saveUser(User user) {
-        return userRepository.save(user);
-    }
+    User retrieveUserById(Long id);
 
-    public User retrieveUserById(Long id) {
-        return userRepository.getOne(id);
-    }
+    List<User> getAllUser();
 
-    public List<User> getAllUser() {
-        return userRepository.findAll();
-    }
+    void enableOrDisableUser(Long id, String name, String surname, Integer enabled);
 
-    public void enableOrDisableUser(Long id, String name, String surname, Integer enabled) {
-        userRepository.enableOrDisableUserById(id, name, surname, enabled);
-    }
-
-    public void updateUserById(Long id, String name, String surname) {
-        userRepository.updateUserById(id, name, surname);
-    }
+    void updateUserById(Long id, String name, String surname);
 }

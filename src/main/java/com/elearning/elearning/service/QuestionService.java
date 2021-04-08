@@ -1,40 +1,20 @@
 package com.elearning.elearning.service;
 
 import com.elearning.elearning.model.Question;
-import com.elearning.elearning.repository.QuestionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class QuestionService {
+public interface QuestionService {
 
-    @Autowired
-    private QuestionRepository questionRepository;
+    Question saveQuestion(Question question);
 
-    public Question saveQuestion(Question question) {
-        return questionRepository.save(question);
-    }
+    List<Question> getAll();
 
-    public List<Question> getAll() {
-        return questionRepository.findAll();
-    }
+    List<Question> getQuestionByUserId(Long userId);
 
-    public List<Question> getQuestionByUserId(Long userId) {
-        return questionRepository.findQuestionByUserId(userId);
-    }
+    Question getQuestionById(Long id);
 
-    public Question getQuestionById(Long id) {
-        return questionRepository.getOne(id);
-    }
+    void deleteQuestion(Long id);
 
-    public void deleteQuestion(Long id) {
-        questionRepository.deleteById(id);
-    }
-
-    public void updateQuestion(Long id, String title, String description, Long userId) {
-        questionRepository.updateQuestion(id, title, description, userId);
-    }
-
+    void updateQuestion(Long id, String title, String description, Long userId);
 }
